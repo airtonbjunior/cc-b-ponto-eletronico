@@ -1,3 +1,6 @@
+// TO-DO:
+// Organizar código-fonte,
+
 const diaSemana = document.getElementById("dia-semana");
 const diaMesAno = document.getElementById("dia-mes-ano");
 const horaMinSeg = document.getElementById("hora-min-seg");
@@ -12,19 +15,20 @@ btnDialogFechar.addEventListener("click", () => {
     dialogPonto.close();
 });
 
-// TO-DO:
-// A data e hora do dialog devem ser atualizadas automaticamente
-// a hora a cada segundo e a data sempre 00:00:00
-// o setInterval do dialog tem que ser desativado ao fechar o dialog
-const dialogData = document.getElementById("dialog-data");
-dialogData.textContent = "Data: " + getCurrentDate();
 
+let registerLocalStorage = getRegisterLocalStorage();
+
+const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
-dialogHora.textContent = "Hora: " + getCurrentHour();
+
 
 diaSemana.textContent = getWeekDay();
 diaMesAno.textContent = getCurrentDate();
 
+
+// TO-DO:
+// Por que esta função não retorna a localização?
+// [doc]
 function getCurrentPosition() {
     navigator.geolocation.getCurrentPosition((position) => {
         return position;
@@ -35,17 +39,21 @@ function getCurrentPosition() {
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
 btnDialogBaterPonto.addEventListener("click", () => {
 
+    let typeRegister = document.getElementById("tipos-ponto").value;
+
     let ponto = {
         "data": getCurrentDate(),
         "hora": getCurrentHour(),
         "localizacao": getCurrentPosition(),
         "id": 1,
-        "tipo": document.getElementById("tipos-ponto").value
+        "tipo": typeRegister
     }
 
     console.log(ponto);
 
-    saveRegisterLocalStorage(JSON.stringify(ponto));
+    saveRegisterLocalStorage(ponto);
+
+    localStorage.setItem("lastTypeRegister", typeRegister);
 
     dialogPonto.close();
 
@@ -56,13 +64,28 @@ btnDialogBaterPonto.addEventListener("click", () => {
 
 
 function saveRegisterLocalStorage(register) {
-    // TO-DO:
-    // salvar array de objetos
-    localStorage.setItem("register", register);
+    registerLocalStorage.push(register); // Array
+    localStorage.setItem("register", JSON.stringify(registerLocalStorage));
+} 
+
+
+// Esta função deve retornar sempre um ARRAY, mesmo que seja vazio
+function getRegisterLocalStorage() {
+    let registers = localStorage.getItem("register");
+
+    if(!registers) {
+        return [];
+    }
+
+    return JSON.parse(registers); // converte de JSON para Array
 }
 
 
 function register() {
+    // TO-DO:
+    // Atualizar hora a cada segundo e data 00:00:00
+    dialogData.textContent = "Data: " + getCurrentDate();
+    dialogHora.textContent = "Hora: " + getCurrentHour();
     dialogPonto.showModal();
 }
 
@@ -73,13 +96,8 @@ function getWeekDay() {
 }
 
 function getCurrentHour() {
-    // TO-DO:
-    // Considerar os métodos abaixo para incluir zeros em numeros < 10
-    // padStart()
-    // slice()
-    // formatos de hora considerando o locale do usuário
     const date = new Date();
-    return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return String(date.getHours()).padStart(2, '0') + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
 }
 
 
@@ -107,4 +125,5 @@ function printCurrentHour() {
 }
 
 
+printCurrentHour();
 setInterval(printCurrentHour, 1000);
