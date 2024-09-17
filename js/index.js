@@ -65,10 +65,11 @@ btnDialogBaterPonto.addEventListener("click", () => {
     divAlertaRegistroPonto.classList.remove("hidden");
     divAlertaRegistroPonto.classList.add("show");
 
-    // Aguardar 3s e remover a classe show e adicionar a classe hidden
+    // Aguardar 5s e remover a classe show e adicionar a classe hidden
+    // usar setTimeout com 5000ms
+    // setTimeout(()=>{},5000)
 
 
-    
     // TO-DO:
     // CRIAR UM ALERTA NO TOPO DA PÁGINA PRINCIPAL PARA CONFIRMAR O REGISTRO DE PONTO
     // DEVE FICAR ABERTO POR 3 SEGUNDOS E DEVE TER UM EFEITO DE TRANSIÇÃO

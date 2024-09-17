@@ -15,14 +15,18 @@
     left: 0;
     width: 100%;
     background-color: #ccc;
+    /* posicionar fora da página */
+    /* pode usar o translate no eixo Y */
 }
 
 /* TO-DO: */
 /* Adicionar código CSS para alterar a opacidade */
 .hidden {
+    /* enviar para fora da página */
     opacity: 0;
 }
 
 .show {
+    /* trazer para dentro da página */
     opacity: 1;
 }
