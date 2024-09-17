@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="alerta-registro-ponto" class="hidden">
+        <p>Ponto registrado com sucesso</p>
+    </div>
     <div class="data-hora">
         <p id="dia-semana">Segunda-feira</p>
         <p id="dia-mes-ano">26/08/2024</p>
@@ -25,6 +28,7 @@
             <option value="saida">Saída</option>
         </select>
         <button id="btn-dialog-bater-ponto">Registrar ponto</button>
+        <p id="dialog-last-register"></p>
         <button id="btn-dialog-fechar">X</button>
     </dialog>
     <!-- TO-DO: -->

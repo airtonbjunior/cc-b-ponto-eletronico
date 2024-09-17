@@ -21,6 +21,9 @@ let registerLocalStorage = getRegisterLocalStorage();
 const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
 
+const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
+
+
 
 diaSemana.textContent = getWeekDay();
 diaMesAno.textContent = getCurrentDate();
@@ -54,12 +57,23 @@ btnDialogBaterPonto.addEventListener("click", () => {
     saveRegisterLocalStorage(ponto);
 
     localStorage.setItem("lastTypeRegister", typeRegister);
+    localStorage.setItem("lastDateRegister", ponto.data);
+    localStorage.setItem("lastTimeRegister", ponto.hora);
 
     dialogPonto.close();
 
+    divAlertaRegistroPonto.classList.remove("hidden");
+    divAlertaRegistroPonto.classList.add("show");
+
+    // Aguardar 3s e remover a classe show e adicionar a classe hidden
+
+
+    
     // TO-DO:
-    // Fechar o dialog ao bater ponto e apresentar, de alguma forma
-    // uma confirmação (ou não) para o usuário
+    // CRIAR UM ALERTA NO TOPO DA PÁGINA PRINCIPAL PARA CONFIRMAR O REGISTRO DE PONTO
+    // DEVE FICAR ABERTO POR 3 SEGUNDOS E DEVE TER UM EFEITO DE TRANSIÇÃO
+    // DEVE PODER SER FECHADO PELO USUÁRIO QUE NÃO QUISER AGUARDAR 3s
+    // DEVE MOSTRAR UMA MENSAGEM DE SUCESSO AO REGISTRAR O PONTO
 });
 
 
@@ -81,11 +95,20 @@ function getRegisterLocalStorage() {
 }
 
 
+
+
+
+// TO-DO:
+// alterar o nome da função
 function register() {
     // TO-DO:
     // Atualizar hora a cada segundo e data 00:00:00
     dialogData.textContent = "Data: " + getCurrentDate();
     dialogHora.textContent = "Hora: " + getCurrentHour();
+
+    let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
+    document.getElementById("dialog-last-register").textContent = lastRegisterText;
+
     dialogPonto.showModal();
 }
 
