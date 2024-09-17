@@ -15,18 +15,28 @@
     left: 0;
     width: 100%;
     background-color: #ccc;
+    /* TO-DO: */
     /* posicionar fora da página */
     /* pode usar o translate no eixo Y */
+    /* usar um efeito de transição */
+}
+
+#alerta-registro-ponto p {
+    text-align: center;
+    /* TO-DO: */
+    /* Estilizar */
 }
 
 /* TO-DO: */
 /* Adicionar código CSS para alterar a opacidade */
 .hidden {
+    /* TO-DO: */
     /* enviar para fora da página */
     opacity: 0;
 }
 
 .show {
+    /* TO-DO: */
     /* trazer para dentro da página */
     opacity: 1;
 }
