@@ -40,3 +40,13 @@
     /* trazer para dentro da página */
     opacity: 1;
 }
+
+
+#div-btn-bater-ponto {
+    text-align: center;
+}
+
+.data-hora p {
+    font-size: 2rem; /* tamanho relativo */
+    /* ??? */
+}

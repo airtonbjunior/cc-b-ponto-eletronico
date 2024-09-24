@@ -127,6 +127,12 @@ function register() {
     dialogData.textContent = "Data: " + getCurrentDate();
     dialogHora.textContent = "Hora: " + getCurrentHour();
 
+
+    // TO-DO:
+    // Verificar se há último registro. Se não houver, tratar o que será escrito na base do dialog
+    // Opções: escrever "Sem registros anteriores" ou não escrever nada
+
+
     let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
     document.getElementById("dialog-last-register").textContent = lastRegisterText;
 
