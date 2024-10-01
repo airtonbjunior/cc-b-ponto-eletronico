@@ -1,5 +1,5 @@
 // TO-DO:
-// Organizar código-fonte,
+// Organizar código-fonte
 
 const diaSemana = document.getElementById("dia-semana");
 const diaMesAno = document.getElementById("dia-mes-ano");
@@ -67,7 +67,6 @@ btnDialogBaterPonto.addEventListener("click", async () => {
 
     console.log(lastTypeRegister);
 
-    // aguardar o processamento da função para continuar com o código
     let userCurrentPosition = await getCurrentPosition();
 
     let ponto = {
