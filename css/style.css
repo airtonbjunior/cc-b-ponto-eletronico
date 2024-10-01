@@ -1,5 +1,8 @@
 .data-hora {
     text-align: center;
+    font-family: "Nanum Gothic Coding", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 #btn-dialog-fechar {
@@ -20,6 +23,10 @@
     text-align: center;
     color: white;
     font-size: 1.1rem;
+    text-align: center;
+    font-family: "Nanum Gothic Coding", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
@@ -51,12 +58,12 @@
 }
 
 .data-hora p {
-    font-size: 2rem; /* tamanho relativo */
-    /* ??? */
+    font-size: 2rem; 
 }
 
 #dialog-ponto p {
     font-size: 1.5rem;
+    text-align: center;
 }
 
 #dialog-ponto select {

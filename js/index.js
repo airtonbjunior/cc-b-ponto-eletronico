@@ -36,9 +36,19 @@ diaMesAno.textContent = getCurrentDate();
 // TO-DO:
 // Por que esta função não retorna a localização?
 // [doc]
-function getCurrentPosition() {
-    navigator.geolocation.getCurrentPosition((position) => {
-        return position;
+// função assíncrona
+async function getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let userLocation = {
+                "latitude": position.coords.latitude,
+                "longitude": position.coords.longitude
+            }
+            resolve(userLocation);
+        },
+        (error) => {
+            reject("Erro ao recuperar a localização " + error);
+        });
     });
 }
 
@@ -51,16 +61,19 @@ btnCloseAlertRegister.addEventListener("click", () => {
 });
 
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
-btnDialogBaterPonto.addEventListener("click", () => {
+btnDialogBaterPonto.addEventListener("click", async () => {
     const typeRegister = document.getElementById("tipos-ponto");
     let lastTypeRegister = localStorage.getItem("lastTypeRegister");
 
     console.log(lastTypeRegister);
 
+    // aguardar o processamento da função para continuar com o código
+    let userCurrentPosition = await getCurrentPosition();
+
     let ponto = {
         "data": getCurrentDate(),
         "hora": getCurrentHour(),
-        "localizacao": getCurrentPosition(),
+        "localizacao": userCurrentPosition,
         "id": 1,
         "tipo": typeRegister.value
     }
@@ -98,7 +111,7 @@ function getRegisterLocalStorage() {
         return [];
     }
 
-    return JSON.parse(registers); // converte de JSON para Array
+    return JSON.parse(registers); 
 }
 
 // TO-DO:
