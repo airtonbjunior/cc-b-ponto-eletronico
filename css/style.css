@@ -8,7 +8,6 @@
     right: 0;
 }
 
-/* Posicionamento do alerta no topo da página com position fixed */
 #alerta-registro-ponto {
     position: fixed;
     bottom: 20px;
@@ -54,4 +53,18 @@
 .data-hora p {
     font-size: 2rem; /* tamanho relativo */
     /* ??? */
+}
+
+#dialog-ponto p {
+    font-size: 1.5rem;
+}
+
+#dialog-ponto select {
+    padding: 20px;
+    font-size: 1.3rem;
+}
+
+#btn-dialog-bater-ponto {
+    padding: 20px;
+    font-size: 1.3rem;
 }

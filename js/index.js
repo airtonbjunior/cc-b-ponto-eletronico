@@ -1,6 +1,5 @@
 // TO-DO:
 // Organizar código-fonte,
-// Tratar botão de fechar do alerta de registro
 
 const diaSemana = document.getElementById("dia-semana");
 const diaMesAno = document.getElementById("dia-mes-ano");
@@ -16,7 +15,6 @@ btnDialogFechar.addEventListener("click", () => {
     dialogPonto.close();
 });
 
-
 const nextRegister = {
     "entrada": "intervalo",
     "intervalo": "volta-intervalo", 
@@ -24,14 +22,12 @@ const nextRegister = {
     "saida": "entrada"
 }
 
-
 let registerLocalStorage = getRegisterLocalStorage();
 
 const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
 
 const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
-
 
 diaSemana.textContent = getWeekDay();
 diaMesAno.textContent = getCurrentDate();
@@ -46,8 +42,13 @@ function getCurrentPosition() {
     });
 }
 
-
-
+// TO-DO:
+// Problema: os 5 segundos continuam contando
+const btnCloseAlertRegister = document.getElementById("alerta-registro-ponto-fechar");
+btnCloseAlertRegister.addEventListener("click", () => {
+    divAlertaRegistroPonto.classList.remove("show");
+    divAlertaRegistroPonto.classList.add("hidden");
+});
 
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
 btnDialogBaterPonto.addEventListener("click", () => {
@@ -68,7 +69,6 @@ btnDialogBaterPonto.addEventListener("click", () => {
 
     saveRegisterLocalStorage(ponto);
 
-    
     localStorage.setItem("lastDateRegister", ponto.data);
     localStorage.setItem("lastTimeRegister", ponto.hora);
 
@@ -84,7 +84,6 @@ btnDialogBaterPonto.addEventListener("click", () => {
 
 });
 
-
 function saveRegisterLocalStorage(register) {
     const typeRegister = document.getElementById("tipos-ponto");
     registerLocalStorage.push(register); // Array
@@ -92,8 +91,6 @@ function saveRegisterLocalStorage(register) {
     localStorage.setItem("lastTypeRegister", typeRegister.value);
 } 
 
-
-// Esta função deve retornar sempre um ARRAY, mesmo que seja vazio
 function getRegisterLocalStorage() {
     let registers = localStorage.getItem("register");
 
@@ -103,7 +100,6 @@ function getRegisterLocalStorage() {
 
     return JSON.parse(registers); // converte de JSON para Array
 }
-
 
 // TO-DO:
 // alterar o nome da função
@@ -119,6 +115,12 @@ function register() {
         document.getElementById("dialog-last-register").textContent = lastRegisterText;
     }
 
+    // TO-DO
+    // Como "matar" o intervalo a cada vez que o dialog é fechado?
+    setInterval(() => {
+        dialogHora.textContent = "Hora: " + getCurrentHour();
+    }, 1000);
+
     dialogPonto.showModal();
 }
 
@@ -133,7 +135,6 @@ function getCurrentHour() {
     return String(date.getHours()).padStart(2, '0') + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
 }
 
-
 function getCurrentDate() {
     const date = new Date();
     return String(date.getDate()).padStart(2, '0') + "/" + String((date.getMonth() + 1)).padStart(2, '0') + "/" + String(date.getFullYear()).padStart(2, '0');
@@ -142,7 +143,6 @@ function getCurrentDate() {
 function printCurrentHour() {
     horaMinSeg.textContent = getCurrentHour();
 }
-
 
 printCurrentHour();
 setInterval(printCurrentHour, 1000);
