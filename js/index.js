@@ -33,10 +33,6 @@ diaSemana.textContent = getWeekDay();
 diaMesAno.textContent = getCurrentDate();
 
 
-// TO-DO:
-// Por que esta função não retorna a localização?
-// [doc]
-// função assíncrona
 async function getCurrentPosition() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
