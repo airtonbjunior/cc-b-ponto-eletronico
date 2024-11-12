@@ -4,6 +4,9 @@
 function renderList() {
     registers = JSON.parse(localStorage.getItem("register"));
 
+    const containerRegisters = document.getElementById("registros-relatorio");
+
+
     registers.forEach(register => {
         console.log(register);
 
@@ -18,9 +21,12 @@ function renderList() {
         const divRegistro = document.createElement("div");
         
         // [?]
-        divRegistro.innerHTML = `<p>${register.date}</p>`;    
+        divRegistro.innerHTML = `<p>${register.data}</p>`;    
 
         //[?]
+        // Último registro está correto? Por que?
+        // data x date
+        containerRegisters.appendChild(divRegistro);
     });
 
 }
