@@ -57,6 +57,7 @@ btnCloseAlertRegister.addEventListener("click", () => {
 });
 
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
+
 btnDialogBaterPonto.addEventListener("click", async () => {
     const typeRegister = document.getElementById("tipos-ponto");
     let lastTypeRegister = localStorage.getItem("lastTypeRegister");
@@ -65,20 +66,40 @@ btnDialogBaterPonto.addEventListener("click", async () => {
 
     let userCurrentPosition = await getCurrentPosition();
 
-    let ponto = {
-        "data": getCurrentDate(),
-        "hora": getCurrentHour(),
-        "localizacao": userCurrentPosition,
-        "id": 1,
-        "tipo": typeRegister.value
-    }
+    //let ponto = {
+    //    "data": getCurrentDate(),
+    //    "hora": getCurrentHour(),
+    //    "localizacao": userCurrentPosition,
+    //    "id": 1,
+    //   "tipo": typeRegister.value
+    //}
 
-    console.log(ponto);
+    //console.log(ponto);
 
-    saveRegisterLocalStorage(ponto);
 
-    localStorage.setItem("lastDateRegister", ponto.data);
-    localStorage.setItem("lastTimeRegister", ponto.hora);
+    fetch('http://localhost:3000/ponto', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+            dataHora: getCurrentDate() + " " + getCurrentHour(),
+            tipo: typeRegister.value,
+            id_usuario: 1,
+            localizacao: JSON.stringify(userCurrentPosition)
+        })
+    })
+    .then(() => {
+        console.log("Ponto criado com sucesso!");
+    })  
+    .catch(error => {
+        console.log(error);
+    });
+
+
+
+    //saveRegisterLocalStorage(ponto);
+
+    //localStorage.setItem("lastDateRegister", ponto.data);
+    //localStorage.setItem("lastTimeRegister", ponto.hora);
 
     dialogPonto.close();
 
@@ -91,6 +112,8 @@ btnDialogBaterPonto.addEventListener("click", async () => {
     }, 5000);
 
 });
+
+
 
 function saveRegisterLocalStorage(register) {
     const typeRegister = document.getElementById("tipos-ponto");
