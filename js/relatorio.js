@@ -1,6 +1,34 @@
 //console.log(JSON.parse(localStorage.getItem("register")));
 
 
+
+function getPontos() {
+
+    const containerRegisters = document.getElementById("registros-relatorio");
+
+    fetch('http://localhost:3000/pontos/usuario/1')
+    .then((metadata) => {
+        console.log("Sucesso!");
+        //console.log(metadata);
+        return metadata.json();
+    })
+    .then((data) => {
+        //console.log(data);
+        data.forEach(ponto => {
+            console.log(ponto);
+            const divPonto = document.createElement("div");
+            divPonto.innerHTML = `<p>Data/Hora: ${ponto.dataHora} | Tipo: ${ponto.tipo}</p><button id=btn_exclui_${ponto.id_ponto}>X</button>`;
+            containerRegisters.appendChild(divPonto);
+        })
+    })
+    .catch(error => {
+        console.log(error)
+    });
+
+}
+
+
+
 function renderList() {
     registers = JSON.parse(localStorage.getItem("register"));
 
@@ -9,15 +37,6 @@ function renderList() {
 
     registers.forEach(register => {
         console.log(register);
-
-        // Padrão de apresentação
-        // > 08/10/2024
-        // Entrada | 08:00:35 | Obs | Anexo | Editar | Excluir
-
-        // [!]
-        // iterar a lista de registros e criar as entradas
-
-        // [?]
         const divRegistro = document.createElement("div");
         
         // [?]
@@ -31,4 +50,6 @@ function renderList() {
 
 }
 
-renderList();
+//renderList();
+
+getPontos();
