@@ -17,8 +17,8 @@ btnDialogFechar.addEventListener("click", () => {
 
 const nextRegister = {
     "entrada": "intervalo",
-    "intervalo": "volta-intervalo", 
-    "volta-intervalo": "saida", 
+    "intervalo": "volta", 
+    "volta": "saida", 
     "saida": "entrada"
 }
 
